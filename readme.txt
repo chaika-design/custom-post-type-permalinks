@@ -1,3 +1,46 @@
+=== 途中 ===
+カスタム投稿の設定で
+'rewrite' => true (default)の場合
+
+== アップデート前 ==
+カスタム投稿 個別ページ:
+ home_url() /%post_type%/ カスタム投稿タイプのパーマリンクの設定で設定したslug
+カスタム投稿 アーカイブ:
+　home_url() /%post_type%/
+カスタム投稿 taxsonomy アーカイブ:
+　home_url() /%post_type%/%taxsonomy%/ カスタム投稿タイプのパーマリンクの設定で設定したslug
+
+だったが、
+== アップデート後 ==
+カスタム投稿 個別ページ:
+ home_url() / substr( $wp_rewrite->front, 1 ) /%post_type%/ カスタム投稿タイプのパーマリンクの設定で設定したslug
+カスタム投稿 アーカイブ:
+　home_url() / substr( $wp_rewrite->front, 1 ) /%post_type%/
+カスタム投稿 taxsonomy アーカイブ:
+　home_url() /%post_type%/%taxsonomy%/ カスタム投稿タイプのパーマリンクの設定で設定したslug
+
+となってしまっていた。
+
+== 暫定的回避方法 ==
+カスタム投稿の設定
+```
+'rewrite' => array(
+  'slug'       => $post_type,
+  'with_front' => false,
+)
+```
+とすることでアップデート前のURLにすることが出来る。
+
+== 挙動として ==
+wordpressを使ってサイトを構築する場合
+フロントページと投稿ページを分けると思うので
+rewrite設定がdefault(frue)の時も
+カスタム投稿タイプのパーマリンクの設定は
+全て、
+```home_url() / %post_type% / 自分の設定```
+となるように修正したい。
+
+
 === Custom Post Type Permalinks ===
 Contributors: Toro_Unit
 Tags: permalink,permalinks,custom post type,custom taxonomy,cms
