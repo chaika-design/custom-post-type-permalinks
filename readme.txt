@@ -1,3 +1,7 @@
+== v0.8.7.6 ==
+最新版にするとカスタム投稿のURLが色々と変更されてしまい
+404ページになる部分が余りにも多かったので、一旦 v0.8.7.6に戻したブランチを作成
+
 === Custom Post Type Permalinks ===
 Contributors: Toro_Unit
 Tags: permalink,permalinks,custom post type,custom taxonomy,cms
